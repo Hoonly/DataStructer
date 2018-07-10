@@ -13,7 +13,7 @@ void  trans(LinkList &L)
 	LNode *tmp;//暂存后继结点，避免一次循环过后断链
     while(L!=p)
     {
-       	tmp=L->next
+       	tmp=L->next;
         L->next=p->next;
         p->next=L;
         L=tmp;//恢复下一次循环要使用的结点
