@@ -1,7 +1,6 @@
 //在带头结点的单链表L中删除所有值为x的结点，并释放空间
 void delete_X(LinkList &L,int x)
 {
-    LNode *start=L;
     LNode *pre;//记录当前结点的前驱，初始化为头结点
 	while(L->next!=NULL)
 	{
