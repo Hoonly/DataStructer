@@ -8,3 +8,21 @@ void transPrint(LinkList &L)
     printf("%d ",L->data);
 }
 
+
+//利用栈实现反向输出链表
+void transPrintByStack(LinkList &L)
+{
+    stack<int> s;
+    L=L->next;
+    while(L!=NULL)
+    {
+        s.push(L->data);
+        L=L->next;
+    }
+    while(!s.empty())
+    {
+        printf("%d",s.top());
+        s.pop();
+    }
+}
+
