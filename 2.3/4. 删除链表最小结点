@@ -1,0 +1,23 @@
+//删除最小值结点
+void delete_min(LinkList &L)
+{
+    LNode *pre=L;
+    L=L->next;
+
+    LNode *min_p,*min_pre;//同时记录最小结点的前驱
+    min_p=L->next;//初始假设第一个结点为最小
+
+    while(L!=NULL)
+    {
+        if(L->data<min_p->data)
+        {
+            min_p=L;
+            min_pre=pre;
+        }
+        pre=L;
+        L=L->next;
+    }
+
+    min_pre->next=min_p->next;
+    delete min_p;
+}
