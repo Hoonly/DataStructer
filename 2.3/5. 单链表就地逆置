@@ -10,12 +10,13 @@ void  trans(LinkList &L)
     }
     L=L->next;
     //头插法依次插到尾结点后面
+	LNode *tmp;//暂存后继结点，避免一次循环过后断链
     while(L!=p)
     {
-        LNode *tmp=L->next;
+       	tmp=L->next
         L->next=p->next;
         p->next=L;
-        L=tmp;
+        L=tmp;//恢复下一次循环要使用的结点
     }
     //重建头结点
     LNode *s=new LNode;
