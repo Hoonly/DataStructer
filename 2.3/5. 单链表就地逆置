@@ -1,0 +1,24 @@
+//“就地"逆置链表，辅助空间复杂度为O(1)
+//用头插法查到尾结点
+//逆置之后没有头结点,所以重建
+void  trans(LinkList &L)
+{
+    LNode *p=L;//找到尾结点
+    while(p->next!=NULL)
+    {
+        p=p->next;
+    }
+    L=L->next;
+    //头插法依次插到尾结点后面
+    while(L!=p)
+    {
+        LNode *tmp=L->next;
+        L->next=p->next;
+        p->next=L;
+        L=tmp;
+    }
+    //重建头结点
+    LNode *s=new LNode;
+    s->next=L;
+    L=s;
+}
