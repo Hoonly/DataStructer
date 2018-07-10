@@ -1,1 +1,10 @@
+//反向输出带头结点单链表，递归实现
+//需要注意的是调用这个函数时应该传入L->next，不然会输出头结点
+void transPrint(LinkList &L)
+{
+    if(L->next!=NULL)
+        transPrint(L->next);
+
+    printf("%d ",L->data);
+}
 
