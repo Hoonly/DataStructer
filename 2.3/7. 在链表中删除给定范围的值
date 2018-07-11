@@ -1,0 +1,21 @@
+//删除给定范围a-b之间的元素
+//注意删除的时候要保存后继结点，以防下次循环断链找不到L了
+void delete_range(LinkList &L,int a,int b)
+{
+    LNode *pre=L;//记录前驱
+    L=L->next;
+    while(L!=NULL)
+    {
+        if(L->data>=a&&L->data<=b)
+        {
+            LNode *q=L->next;//保存后继结点
+            pre->next=q;
+            L=q;//让当前结点指向上面保存的后继结点，以便下次循环
+        }
+        else
+        {
+            pre=L;
+            L=L->next;
+        }
+    }
+}
