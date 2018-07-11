@@ -1,0 +1,23 @@
+//冒泡排序，递增
+//有一个问题的每一趟都要从头走到尾，其实排好序的尾部不需要再去扫描了，但是对于链表没有前驱不好控制
+void listSort(LinkList &L)
+{
+    LNode *p;//每一趟的指针
+    LNode *c=L->next;//控制执行多少趟
+    while(c->next!=NULL)
+    {
+        p=L->next;
+        while(p->next!=NULL)
+        {
+            if(p->data>p->next->data)//交换数据域，大的往后走
+            {
+                int tmp=p->data;
+                p->data=p->next->data;
+                p->next->data=tmp;
+            }
+            p=p->next;
+        }
+        c=c->next;
+    }
+
+}
