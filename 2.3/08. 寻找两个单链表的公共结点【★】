@@ -1,0 +1,50 @@
+//8.寻找两个链表的公共结点
+//所谓公共结点，即他们的后继结点相同，也就是说从这个结点开始，以后的链表是重合的
+//因此先滤掉较长链表的前部分，接下来遍历两个链表长度相同，找第一个相同的结点
+LNode* findPublicNode(LinkList &A, LinkList &B)
+{
+	LNode *p = A;
+	LNode *q = B;
+	int count_a = 0;
+	int count_b = 0;
+	//首先分别统计两个链表的长度
+	while (p->next != NULL)
+	{
+		count_a++;
+		p = p->next;
+	}
+	while (q->next != NULL)
+	{
+		count_b++;
+		q = q->next;
+	}
+	int dif = abs(count_a - count_b);//计算长度差值
+	LNode *longlist, *shortlist;
+	if (count_a > count_b)//A较长
+	{
+		longlist = A->next;
+		shortlist = B->next;
+	}
+	else//B较长
+	{
+		longlist = B->next;
+		shortlist = A->next;
+	}
+	//长链表指针定位到剩余长度=短链表长度
+	while (dif != 0)
+	{
+		longlist = longlist->next;
+		dif--;
+	}
+	while (longlist!=NULL)
+	{
+		if (longlist == shortlist)
+			break;
+		else
+		{
+			longlist = longlist->next;
+			shortlist = shortlist->next;
+		}
+	}
+	return longlist;
+}
