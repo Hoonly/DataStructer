@@ -1,0 +1,14 @@
+//18.连接两个循环单链表
+//h1,h2为两个链表的头指针，也就是尾结点的指针
+//注意h1,h2是额外的指针，不属于原有链表结构，不能直接对其修改指向
+void mergeCycleList(LinkList &A, LinkList &B,LNode *h1,LNode *h2)
+{
+	LNode *p = h1;
+	LNode *q = h2;
+	while (p->next != NULL)
+		p = p->next;
+	while (q->next != NULL)
+		q = q->next;
+	p->next = h2;
+	q->next = h1;
+}
