@@ -1,0 +1,30 @@
+//主要思路:假设有A B两个链表，逐个两两比较元素
+//谁小谁的指针前进一个，相等的话均前进一个
+void merge_decresing(LinkList &A,LinkList &B)
+{
+	LinkList *C;=new LinkList;
+	C->next=NULL;
+	LNode *a,*b,*c;
+	a=A->next;
+	b=B->next;
+	c=C;
+	while(a!=NULL&&b!=NULL)
+	{
+		LNode *q;
+		if(a->data<b->data)
+			a=a->next;
+		else if(b->data<a->data)
+			b=b->next;
+		else
+		{
+			q->data=a->data;
+			c->next=q;
+			c=c->next;
+			a=a->next;
+			b=b->next;
+		}
+	}
+	c->next=NULL;//设置新链表的尾结点指针为空
+}
+	
+	
