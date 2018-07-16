@@ -1,0 +1,29 @@
+//19.反复找到循环单链表链表中的最小结点并删除，直到链表为空
+//注意是循环单链表,判空条件为头指针指向自身
+void alwaysFindSmall(LinkList &L)
+{
+	while (L->next != L)
+	{
+		LNode *p = L->next;//工作指针
+		LNode *pre = L;//记录工作指针的前驱
+		int min = p->data;
+		LNode *min_pre = L;//记录最小值结点的前驱
+		LNode *min_node = p;//记录最小值结点
+		while (p != NULL)
+		{
+			if (p->data < min)
+			{
+				min = p->data;
+				min_node = p;
+				min_pre = pre;
+
+			}
+			pre = p;
+			p = p->next;
+		}
+		//删除最小结点，输出其值
+		cout << min_node->data << endl;
+		min_pre->next = min_node->next;
+		delete min_node;
+	}
+}
