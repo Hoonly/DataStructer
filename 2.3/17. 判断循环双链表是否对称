@@ -1,0 +1,24 @@
+//17.判断一个带头节点的循环双链表是否对称
+//主要思想，双指针，首尾同时向中间进行，有不同或者指针相遇则结束
+bool isSymm(LinkList &L)
+{
+	bool flag = true;
+	LNode *left = L->next;
+	LNode *right = L->prior;//书上用prior，我习惯用pre
+	//若链表长位奇数，left==right时终止；若为偶数，left->next==right终止
+	while (left != right && left->next != right)
+	{
+		if (left->data == right->data)
+		{
+			left = left->next;
+			right = right->prior;
+		}
+		else
+		{
+			flag = false;
+			break;
+		}
+	}
+
+	return flag;
+}
