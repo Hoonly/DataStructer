@@ -1,0 +1,45 @@
+//主要思路:假设有A B两个链表，逐个两两比较元素，把小的那个用头插法插到
+//A中，最后某个较长链表剩下的元素全部用头插法插到A中
+void merge_decresing(LinkList &A,LinkList &B)
+{
+	LNode *a,*b;
+	a=A->next;
+	b=B->next;
+	while(a!=NULL&&b!=NULL)
+	{
+		LNode *q;
+		if(a->data<b->data)
+		{
+			q=a;
+			a=a->next;
+		}
+		else 
+		{
+			q=b;
+			b=b->next;
+		}
+		q->next=A-next;
+		A->next=q;
+	}
+	//将剩余元素头插法插入到A中
+	if(a!=NULL)
+	{
+		while(a!=NULL)
+		{
+			q=a;
+			a=a->next;
+			q->next=A-next;
+			A->next=q;
+		}
+	}
+	if(b!=NULL)
+	{
+		while(a!=NULL)
+		{
+			q=b;
+			b=b->next;
+			q->next=A-next;
+			A->next=q;
+		}
+	}
+}
