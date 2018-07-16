@@ -1,0 +1,33 @@
+//递增输出带头结点的链表中元素，并释放空间
+//其实也可以先排序，再输出
+//本算法复杂度为O(n^2)
+void increasing_print(LinkList &L)
+{
+	LNode *head=L;//头指针
+	//外层循环，当全部输出的时候头结点指针域为空
+	while(head->next!=NULL)
+	{
+		//内层循环,每次循环都找最小值输出
+		LNode *q=head->next;
+		LNode *pre=head;//记录每个结点的前驱
+		int min=q->data;
+		LNode *min_pre=head;//记录最小值结点的前驱
+		LNode *min_node=q;//记录最小值结点
+		while(q!=NULL)
+		{
+			if(q->data<min)
+			{
+				min_pre=pre;
+				min_node=q;
+				min=q->data;
+			}
+			pre=q;
+			q=q->next;
+		}
+		//每次循环删除一个最小值结点并输出
+		min_pre->next=min_node->next;
+		delete min_node;
+		cout<<min;
+	}
+
+	
