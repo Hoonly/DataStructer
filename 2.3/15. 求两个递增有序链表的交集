@@ -1,0 +1,32 @@
+//用hash减少时间复杂度为O(n)
+//删除A中不属于B的元素
+void inter(LinkList &A,LinkList &B)
+{
+	LNode *a,*b,pre;
+	pre=A;
+	a=A->next;
+	b=b->next;
+	//首先遍历链表B形成hash数组
+	int hash[MAX_INT]={0};
+	while(b!=NULL)
+	{
+		hash[b->data]=1;
+		b=b->next;
+	}
+	
+	while(a!=NULL)
+	{
+		if(hash[a->data]==0)
+		{
+			LNode *q=a;
+			a=a->next;
+			pre->next=a;
+			delete q;
+		}
+		else 
+		{
+			pre=a;
+			a=a->next;
+		}
+	}
+}
