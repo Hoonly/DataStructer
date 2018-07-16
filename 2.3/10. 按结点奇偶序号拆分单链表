@@ -1,0 +1,35 @@
+//把一个带头结点的单链表拆成两个，分别含奇偶序号元素，顺序不变
+//主要思路，新建一个空链表，从原有链表把偶序号的结点拿出来
+//参数A是原有链表，参数B是从外部新建的空链表
+LinkList *B=new LinkList;
+B->next=NULL;
+void split(LinkList &A,LinkList &B)
+{
+	LNode *r=B;
+	LNode *q=L->next;
+	LNode *pre=L;//记录A链表的结点前驱
+	int index=1;//记录序号
+	while(q!=NULL)
+	{
+		if(index%2==0)//如果序号是偶数
+		{
+			//新建结点尾插入B链表
+			LNode *newNode;
+			newNode->data=q->data;
+			r->next=newNode;
+			r=newNode;
+			//在A中删除这个结点
+			LNode *d=q;//令d指向要删除的结点
+			q=q->next;
+			pre->next=q;
+			delete d;
+		}
+		else 
+		{
+			pre=q;
+			q=q->next;
+		}
+		index++;
+	}
+	r->next=NULL;//B链表尾指针置空
+}
