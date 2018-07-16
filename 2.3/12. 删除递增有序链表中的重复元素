@@ -1,0 +1,24 @@
+//设置前驱，如果当前结点数据和前驱重复，就删除
+void delete_same(LinkList L)
+{
+	LNode *pre,*p;
+	pre=L->next;
+	p=pre->next;
+	//从第二个元素开始判断
+	while(p!=NULL)
+	{
+		if(p->data==pre->data)
+		{
+			LNode *d=q;
+			q=q->next;
+			pre->next=q;
+			delete d;
+		}
+		else 
+		{
+			pre=q;
+			q=q->next;
+		}
+	}
+}
+			
