@@ -1,0 +1,42 @@
+//16.两个整数序列链表A,B,判断B是否是A的连续子序列
+bool isSubseq(LinkList &A, LinkList &B)
+{
+	bool flag;
+	LNode *a, *b;
+	a = A->next;
+	b = B->next;
+	//外层循环控制A链表指针前进
+	while (a != NULL)
+	{
+		flag = true;
+		if (a->data == b->data)//如果当前A结点值和B结点开始值相等，则对B循环逐个比较
+		{
+			LNode *p = b->next;
+			LNode *q = a->next;
+			while (q != NULL&&p != NULL)
+			{
+				if (p->data == q->data)
+				{
+					p = p->next;
+					q = q->next;
+				}
+				else//比较过程中遇到不一样的就可以停止内层循环
+				{
+					flag = false;
+					break;
+				}
+			}
+			if (flag)//如果匹配结束外层循环	
+				break;
+			else	
+				a = a->next;//如果B比较结束但是不匹配，A也要前进一个指针
+		}
+		else//否则A要前进一个指针
+		{
+			flag = false;
+			a = a->next;
+		}	
+	}
+
+	return flag;
+}
