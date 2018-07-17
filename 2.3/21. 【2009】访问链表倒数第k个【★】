@@ -1,0 +1,55 @@
+//21【2009真题】在只给头指针的链表中查找倒数第k个位置的元素
+//主要思想：每次扫描压栈，然后访问栈顶第k个元素即可
+//emmmm....评分标准说用辅助空间最高给10分
+int findbackk(LinkList &L, int k, LNode *list)
+{
+	stack<int> s;
+	int length = 0;
+	//将每个结点存入栈中
+	while (list->next != NULL)
+	{
+		s.push(list->data);
+		list = list->next;
+		length++;
+	}
+	//链表长度小于k，失败
+	if (length < k)
+		return 0;
+	//否则，取栈顶第k个数输出
+	int num;
+	while (k--)
+	{
+		num = s.top();
+		s.pop();
+	}
+	cout << num;
+	return 1;
+}
+
+
+//下面给出答案的双指针实现
+//主要思路，设置pq两个指针，p先前进k个,q再跟p一起前进，当p到终点时，q到达倒数第k个位置
+int find_back_k(LinkList &L, int k, LNode *list)
+{
+	LNode *p, *q;
+	p = list->next;
+	q = ->next;
+	int count = 0;//记录p前进的步数
+	while (p != NULL)
+	{
+		if (count < k)//如果未到k，只移动p
+		{
+			count++;
+			p = p->next;
+		}
+		else//当p已经前进了k步时，同时移动p和q
+		{
+			p = p->next;
+			q = q->next;
+		}
+	}
+	if (count < k)//如果p前进不到k步就到了链表尾，说明链表长度<k，查找失败
+		return 0;
+	cout << q->data;
+	return 1;
+}
