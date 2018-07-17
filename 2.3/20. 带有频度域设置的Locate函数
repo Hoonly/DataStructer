@@ -1,0 +1,42 @@
+//20.增加访问频度域的查找指定值函数
+//保证链表结点按访问频度非递增排序，频度相同-最近访问的结点排在前面
+//每次查找之后进行将这个结点插入适当的位置
+LNode* locate(LinkList &L, int x)
+{
+	LNode *p=L->next;
+	//找到结点
+	while (p != NULL)
+	{
+		if (p->data == x)
+		{
+			p->freq++;
+			break;
+		}
+		p = p->next;
+	}
+	//把这个结点插入到合适的位置
+	//因为在每一次查找之前，肯定是按照频度已经排好序了，频度大的在前
+	//所以本次插入操作只需要从头找到第一个<=p->freq的结点，把p插在它之前就可以了
+	//注意题目要求频度相同，最近访问的在前，所以是第一个<=
+	LNode *q = L->next;
+	while (q != NULL)
+	{
+		if (q->freq <= p->freq)
+		{
+			//先把p原来的位置断开
+			p->pre->next = p->next;
+			p->next->pre = p->pre;
+
+			//再把p插到q之前
+			p->next = q;
+			p->pre = q->pre;
+			q->pre->next = p;
+			q->pre = p;
+
+			break;
+		}
+	}
+
+	return p;
+
+}
