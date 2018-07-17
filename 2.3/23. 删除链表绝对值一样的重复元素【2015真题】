@@ -1,0 +1,34 @@
+//23.【2015真题】，删除链表中绝对值相等的重复元素，只保留第一次出现的
+//典型的空间换时间，hash数组记录出现次数，扫描的同时查数组，出现超过一次就删除
+struct LNode
+{
+	int data;
+	LNode *link;
+}LNode,*LinkList;
+
+void delete_same(LinkList &L,int n)
+{
+	LNode *p,*pre;//当前扫描结点和其前驱结点;
+	p=L->link;
+	pre=L;
+	int hash=new int[n+1];
+	for(int i=0;i<n+1;i++)
+		hash[i]=0;
+	while(p!=NULL)
+	{
+		int data=abs(p->data);
+		hash[data]++;//一边扫描一边统计出现的次数
+		if(hash[data]>1)//如果出现超过1次，就删除后来出现的结点
+		{
+			LNode *q=p;
+			p=p->link;
+			pre=p;
+			delete p;
+		}
+		else 
+		{
+			pre=p;
+			p=p->link;
+		}
+	}
+}
