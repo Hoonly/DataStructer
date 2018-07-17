@@ -1,0 +1,18 @@
+//递归删除链表中所有值为x的结点
+//要删除L中的x，先删除L->next中的x，如此递归下去
+//L=L->next这句话，在递归中实际上是L=L->next->next，所以不会断链
+void deleteX(LinkList &L, int x)
+{
+	LNode *p;
+	if (L == NULL)
+		return;
+	if (L->data == x)
+	{
+		p = L;
+		L = L->next;
+		delete p;
+		deleteX(L, x);
+	}
+	else
+		deleteX(L->next, x);
+}
