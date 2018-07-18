@@ -1,0 +1,71 @@
+//利用两个栈来模拟队列，实现入队，出队，判断队列是否为空的操作
+//用s1作入队操作存储，之后出栈到s2中
+//队列空的条件就是s1和s2均为空
+
+bool Enqueue(stack &s1,stack &s2,int x)
+{
+	bool flag;
+	//如果s1不满，直接入栈
+	if(!StackOverflow(s1))
+	{
+		Push(s1,x);
+		flag=true;
+	}
+	//如果s1满并且s2非空，不能入队，否则一会出队时会产生错误的顺序
+	else if(!StackEmpty(s2))
+	{
+		cerr<<"队满";
+		flag=false;
+		
+	}
+	//s1满且s2为空，入队前先把s1中元素放入s2中
+	else 
+	{
+		while(!StackEmpty(s1))
+		{
+			int tmp;
+			Pop(s1,tmp);
+			Push(s2,tmp);
+			
+		}
+		Pop(s1,x);
+		flag=true;
+	}
+	
+	return flag;
+}
+
+bool Dequeue(stack &s1,stack s2,int &x)
+{
+	bool flag;
+	//如果s2里有元素，直接对其出栈
+	if(!StackEmpty(s2)
+	{
+		Pop(s2,x);
+		flag=true;
+	}
+	//如果s2是空的并且s1也是空的，队列为空
+	else if(StackEmpty(s1))
+	{
+		cerr<<"队列空";
+		flag=false;
+	}
+	//如果s2空但是s1有元素，把s1的元素压入s2,然后对s2进行出栈操作
+	else 
+	{
+		while(!StackEmpty(s1))
+		{
+			int tmp;
+			Pop(s1,tmp);
+			Push(s2,tmp);
+		}
+		Pop(s2,x);
+		flag=true;
+	}
+	
+	return flag;
+}
+		
+	
+	
+	
