@@ -1,0 +1,19 @@
+//判定一个出入栈序列是否合法
+bool isRight(char a[],int length)
+{
+	int sizeOfStack=0;//统计每一时刻栈内元素个数，如果栈空的下一个操作仍然是出栈，则非法
+	for(int i=0;i<length;i++)
+	{
+		if(sizeOfStack==0&&a[i]=='O')
+			return false;
+		if(a[i]=='I')
+			sizeOfStack++;
+		else 
+			sizeOfStack--;
+	}
+	//题目要求栈的终态为空
+	if(sizeOfStack!=0)
+		return false;
+	
+	return true;
+}
