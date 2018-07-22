@@ -1,0 +1,29 @@
+//火车软硬座调度，把所有软座调到硬座之前
+//软座进栈即出栈，硬座进栈，最后一次性全部出栈
+void schedul(char *a,int n)
+{
+	SeqStack s;
+	InitStack(&s);
+	for(int i=0;i<n;i++)
+	{
+		if(a[i]=='H')
+		{
+			Pop(s,'H');
+			cout<<"H入栈"<<endl;
+		}
+		else
+		{
+			Pop(s,'S');
+			cout<<"S入栈"<<endl;
+			char tmp;
+			Push(s,&tmp);
+			cout<<"S出栈"<<endl;
+		}
+	}
+	while(!StackEmpty(s))
+	{
+		char tmp;
+		Push(s,&tmp);
+		cout<<"H出栈"<<endl;
+	}
+}
