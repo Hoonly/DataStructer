@@ -1,0 +1,35 @@
+//一个算术表达式包含圆括号、方括号、花括号，判断括号是否匹配
+bool judge(string express)
+{
+	stack<char> s;
+	for(int i=0;i<express.length();i++)
+	{
+		if(express[i]=='('||express[i]=='['||express[i]=='{')
+			s.push(express[i]);
+		else if(express[i]==')')
+		{
+			if(!s.empty()&&s.top()=='(')//匹配上就出栈，注意取栈顶元素前先判断栈是否为空，这种情况会出现在只有右括号的时候，书上答案没有写，我认为错了
+				s.pop();
+			else
+				return false;
+		}
+		else if(express[i]==']')
+		{
+			if(!s.empty()&&s.top()=='[')//匹配上就出栈
+				s.pop();
+			else
+				return false;
+		}
+		else if(express[i]=='}')
+		{
+			if(!s.empty()&&s.top()=='{')//匹配上就出栈
+				s.pop();
+			else
+				return false;
+		}
+	}
+	if(s.empty())//栈空说明全部匹配完成，否则有不匹配的
+		return true;
+	else
+		return false;
+}
